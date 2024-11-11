@@ -6,12 +6,22 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typegen": "sanity schema extract --path=src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
-    "next": "15.0.2"
+    "@gsap/react": "^2.1.1",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.63.0",
+    "framer-motion": "^11.11.11",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.16",
+    "next": "15.0.2",
+    "next-sanity": "^9.8.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.63.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "postcss": "^8",
