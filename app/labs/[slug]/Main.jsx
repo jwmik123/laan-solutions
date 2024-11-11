@@ -12,7 +12,7 @@ const Main = ({ project }) => {
   const overlayRef = useRef(null);
   const titleRef = useRef([]);
 
-  useGSAP(() => {
+  const handleImageLoad = () => {
     // Animation for the overlay and image
     gsap.fromTo(
       overlayRef.current,
@@ -45,7 +45,8 @@ const Main = ({ project }) => {
         delay: 0.8,
       }
     );
-  });
+  };
+
   return (
     <div className="ml-16 mt-32 h-[300svh] w-full max-w-2/3">
       {/* <h2 className="mb-4 text-base font-light text-gray-500">
@@ -61,6 +62,7 @@ const Main = ({ project }) => {
           width={1000}
           height={1000}
           className="object-cover w-full h-full"
+          onLoadingComplete={handleImageLoad}
         />
         <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
         <div className="absolute inset-0 bg-gradient-to-tr from-primary-900 via-transparent to-transparent opacity-20"></div>

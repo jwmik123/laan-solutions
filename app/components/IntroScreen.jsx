@@ -71,12 +71,12 @@ const IntroScreen = () => {
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <h1 className="text-4xl font-bold text-white">LAAN Solutions</h1>
         </div>
-        <div
+        {/* <div
           ref={cursorRef}
           className="absolute z-30 px-4 py-2 text-white translate-x-1/2 translate-y-1/2 rounded-full pointer-events-none bg-primary-500"
         >
           klik
-        </div>
+        </div> */}
       </div>
     </div>
   );

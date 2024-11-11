@@ -11,8 +11,7 @@ const ProjectThumbnail = ({ project }) => {
   const overlayRef = useRef(null);
   const titleRef = useRef([]);
 
-  useGSAP(() => {
-    // Animation for the overlay and image
+  const handleImageLoad = () => {
     gsap.fromTo(
       overlayRef.current,
       { y: "0%" },
@@ -46,7 +45,7 @@ const ProjectThumbnail = ({ project }) => {
         delay: 0.8,
       }
     );
-  }, []);
+  };
 
   return (
     <div className="cursor-pointer group">
@@ -61,6 +60,7 @@ const ProjectThumbnail = ({ project }) => {
                 width={400}
                 height={300}
                 className="object-cover w-full h-full"
+                onLoadingComplete={handleImageLoad}
               />
             </div>
             <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
