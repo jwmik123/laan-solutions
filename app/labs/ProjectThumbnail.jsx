@@ -43,7 +43,7 @@ const ProjectThumbnail = ({ project }) => {
         stagger: 0.02,
         ease: "power3.out",
         duration: 0.5,
-        delay: 0.5,
+        delay: 0.8,
       }
     );
   }, []);
@@ -75,7 +75,7 @@ const ProjectThumbnail = ({ project }) => {
                   ref={(el) => (titleRef.current[index] = el)}
                   className="inline-block"
                 >
-                  {letter}
+                  {letter === " " ? "\u00A0" : letter}
                 </span>
               ))}
             </h2>

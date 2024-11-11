@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import IntroScreen from "./components/IntroScreen";
 import Footer from "./components/Footer";
 export default function Home() {
   const [hovered, setHovered] = useState("");
 
   return (
     <div className="flex flex-row items-center justify-center h-screen">
+      <IntroScreen />
       <div className="relative flex flex-col items-center justify-center space-y-4">
         <Link
           href="/labs"
