@@ -6,7 +6,9 @@ import Image from "next/image";
 const IntroScreen = () => {
   const [isVisible, setIsVisible] = useState(() => {
     // Check if the intro screen has been shown before
-    return !localStorage.getItem("introShown");
+    if (typeof window !== "undefined") {
+      return !localStorage.getItem("introShown");
+    }
     return true;
   });
   const introRef = useRef(null);
