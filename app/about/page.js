@@ -29,6 +29,7 @@ const About = () => {
             <p className="text-lg leading-relaxed text-black">
               Email:{" "}
               <a
+                data-animation-link="no-animation"
                 href="mailto:info@laansolutions.nl"
                 className="text-primary-500"
               >
@@ -37,7 +38,11 @@ const About = () => {
             </p>
             <p className="text-lg leading-relaxed text-black">
               Telefoon:{" "}
-              <a href="tel:+31123456789" className="text-primary-500">
+              <a
+                data-animation-link="no-animation"
+                href="tel:+31123456789"
+                className="text-primary-500"
+              >
                 +31 123 456 789
               </a>
             </p>

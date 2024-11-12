@@ -1,10 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import Navigation from "./Navigation";
 const Header = () => {
   console.log(
     "%cWebsite by %cMik Development!",
@@ -37,7 +36,7 @@ const Header = () => {
     if (navRef.current) {
       navRef.current.style.transform = isNavOpen
         ? "translateX(100%)" // Move off screen when closed
-        : "translateX(0)"; // Bring it on screen when open
+        : "translateX(-20px)"; // Bring it on screen when open
     }
   };
 
@@ -102,52 +101,12 @@ const Header = () => {
               ></div>
             </div>
           </header>
-          <nav
-            ref={navContainer}
-            className="fixed inset-0 z-40 w-full h-full text-white pointer-events-none"
-          >
-            <div
-              className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 bg-black ${
-                isNavOpen ? "opacity-70" : "opacity-0"
-              }`}
-              onClick={toggleNav}
-            ></div>
-            <div
-              ref={navRef}
-              className="fixed right-0 z-10 w-full h-full transition-transform duration-500 translate-x-full md:w-1/3 bg-primary-500"
-            >
-              <div className="flex flex-col h-full gap-5 mt-32">
-                <div className="flex flex-col border-t border-b border-white divide-y">
-                  {["LAbS", "LApS", "LAdS"].map((path) => (
-                    <Link
-                      key={path}
-                      href={`/${path.toLowerCase()}`}
-                      className="p-10 text-4xl font-bold transition-colors duration-300 hover:bg-white hover:text-primary-500"
-                      onClick={() => {
-                        toggleNav();
-                      }}
-                    >
-                      <div className="flex items-center justify-between w-full">
-                        {path.charAt(0) + path.slice(1)}
-                        <ArrowUpRight className="w-14 h-14" />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-                <div className="flex flex-col">
-                  <Link
-                    href="/about"
-                    className="p-10 text-xl"
-                    onClick={() => {
-                      toggleNav();
-                    }}
-                  >
-                    Over ons
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </nav>
+          <Navigation
+            isNavOpen={isNavOpen}
+            toggleNav={toggleNav}
+            navRef={navRef}
+            navContainer={navContainer}
+          />
         </>
       )}
     </>

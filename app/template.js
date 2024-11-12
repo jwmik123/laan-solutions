@@ -39,9 +39,13 @@ export default function Template({ children }) {
     const links = document.querySelectorAll("a");
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default navigation
-        const url = link.getAttribute("href");
-        handleRouteChangeStart(url);
+        const isEmailLink =
+          link.getAttribute("data-animation-link") === "no-animation";
+        if (!isEmailLink) {
+          e.preventDefault(); // Prevent default navigation
+          const url = link.getAttribute("href");
+          handleRouteChangeStart(url);
+        }
       });
     });
 
