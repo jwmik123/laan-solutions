@@ -7,14 +7,12 @@ const Projects = ({ projects }) => {
 
   return (
     <>
-      {!loading ? (
-        <section className="mx-5 mt-32 md:mx-10">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
-              <ProjectThumbnail key={project._id} project={project} />
-            ))}
-          </div>
-        </section>
+      {loading ? (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <ProjectThumbnail key={project._id} project={project} />
+          ))}
+        </div>
       ) : (
         <div>Loading...</div>
       )}

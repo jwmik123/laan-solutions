@@ -9,6 +9,7 @@ import { urlFor } from "@/sanity/lib/image";
 const Main = ({ project }) => {
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
+  const gradientRef = useRef(null);
   const titleRef = useRef([]);
 
   const handleImageLoad = () => {
@@ -23,6 +24,15 @@ const Main = ({ project }) => {
       }
     );
     gsap.fromTo(
+      gradientRef.current,
+      { opacity: 0 },
+      {
+        opacity: 0.5,
+        duration: 1,
+        delay: 1,
+      }
+    );
+    gsap.fromTo(
       imageRef.current,
       { scale: 1.5 },
       {
@@ -34,9 +44,10 @@ const Main = ({ project }) => {
     );
     gsap.fromTo(
       titleRef.current,
-      { y: 50 },
+      { y: 50, opacity: 0 },
       {
         y: 0,
+        opacity: 1,
         stagger: 0.02,
         ease: "power3.out",
         duration: 1,
@@ -58,14 +69,17 @@ const Main = ({ project }) => {
           onLoadingComplete={handleImageLoad}
         />
         <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary-900 via-transparent to-transparent opacity-20"></div>
+        <div
+          ref={gradientRef}
+          className="absolute inset-0 opacity-0 bg-gradient-to-tr from-primary-900 via-transparent to-transparent"
+        ></div>
         <div className="absolute z-10 flex flex-col overflow-hidden bottom-10 left-10">
           <h1 className="text-5xl font-bold text-white">
             {project.title.split("").map((letter, index) => (
               <span
                 key={index}
                 ref={(el) => (titleRef.current[index] = el)}
-                className="inline-block"
+                className="inline-block opacity-0"
               >
                 {letter === " " ? "\u00A0" : letter}
               </span>

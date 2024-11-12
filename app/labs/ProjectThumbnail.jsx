@@ -4,13 +4,11 @@ import { urlFor } from "@/sanity/lib/image";
 import { gsap } from "gsap";
 import { useRef } from "react";
 import Link from "next/link";
-import useProjectStore from "@/app/lib/projectStore";
 
 const ProjectThumbnail = ({ project }) => {
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
   const titleRef = useRef([]);
-  const loading = useProjectStore((state) => state.loading);
 
   const handleImageLoad = () => {
     gsap.fromTo(
@@ -39,7 +37,7 @@ const ProjectThumbnail = ({ project }) => {
       titleRef.current,
       { y: 25 },
       {
-        y: 0,
+        y: -25,
         stagger: 0.02,
         ease: "power3.out",
         duration: 0.5,
@@ -49,44 +47,46 @@ const ProjectThumbnail = ({ project }) => {
   };
 
   return (
-    <div className="cursor-pointer group">
-      <Link href={`/labs/${project.slug.current}`}>
-        {project.image && (
-          <div className="h-[450px] overflow-hidden relative">
-            <div className="w-full h-full transition-all duration-300 group-hover:scale-110">
-              <Image
-                ref={imageRef}
-                src={urlFor(project.image).url()}
-                alt={project.title}
-                width={400}
-                height={300}
-                className="object-cover w-full h-full"
-                onLoadingComplete={() => !loading && handleImageLoad()}
-              />
+    <>
+      <div className="cursor-pointer group">
+        <Link href={`/labs/${project.slug.current}`}>
+          {project.image && (
+            <div className="h-[450px] overflow-hidden relative">
+              <div className="w-full h-full transition-all duration-300 group-hover:scale-110">
+                <Image
+                  ref={imageRef}
+                  src={urlFor(project.image).url()}
+                  alt={project.title}
+                  width={400}
+                  height={300}
+                  className="object-cover w-full h-full"
+                  onLoadingComplete={handleImageLoad}
+                />
+              </div>
+              <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
             </div>
-            <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
-          </div>
-        )}
-        <div className="flex justify-between mx-1 mt-2">
-          <div className="flex flex-col overflow-hidden">
-            <h2 className="text-lg font-bold text-black">
-              {project.title.split("").map((letter, index) => (
-                <span
-                  key={index}
-                  ref={(el) => (titleRef.current[index] = el)}
-                  className="inline-block"
-                >
-                  {letter === " " ? "\u00A0" : letter}
-                </span>
-              ))}
-            </h2>
-          </div>
-          {/* <p className="text-lg font-light text-gray-500">
+          )}
+          <div className="flex justify-between mx-1 mt-2">
+            <div className="flex flex-col overflow-hidden max-h-5">
+              <h2 className="text-lg font-bold text-black translate-y-5">
+                {project.title.split("").map((letter, index) => (
+                  <span
+                    key={index}
+                    ref={(el) => (titleRef.current[index] = el)}
+                    className="inline-block"
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </span>
+                ))}
+              </h2>
+            </div>
+            {/* <p className="text-lg font-light text-gray-500">
             {project.endDate.split("-")[0]}
           </p> */}
-        </div>
-      </Link>
-    </div>
+          </div>
+        </Link>
+      </div>
+    </>
   );
 };
 

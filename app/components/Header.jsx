@@ -32,7 +32,7 @@ const Header = () => {
     secondLineRef.current.classList.toggle("bg-white");
     navContainer.current.classList.toggle("pointer-events-auto");
     navRef.current.style.transform = isNavOpen
-      ? "translateX(200%)"
+      ? "translateX(300%)"
       : "translateX(100%)";
   };
 
@@ -87,7 +87,7 @@ const Header = () => {
         ></div>
         <div
           ref={navRef}
-          className="relative z-10 flex flex-col items-center justify-center w-1/2 h-full transition-transform duration-500 translate-x-[200%] bg-primary-500"
+          className="relative z-10 flex flex-col items-center justify-center w-1/3 h-full transition-transform duration-500 translate-x-[300%] bg-primary-500"
         >
           {["labs", "laps", "lads"].map((path) => (
             <Link

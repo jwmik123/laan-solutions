@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useProjectStore = create((set) => ({
-  loading: false,
+  loading: true,
   setLoading: (loading) => set({ loading }),
 }));
 

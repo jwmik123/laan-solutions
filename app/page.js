@@ -2,16 +2,28 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import IntroScreen from "./components/IntroScreen";
 import Footer from "./components/Footer";
 export default function Home() {
   const [hovered, setHovered] = useState("");
+  const introRef = useRef(null);
+  useGSAP(() => {
+    gsap.fromTo(
+      introRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5 }
+    );
+  });
 
   return (
     <div className="flex flex-row items-center justify-center h-screen">
       <IntroScreen />
-      <div className="relative flex flex-col items-center justify-center space-y-4">
+      <div
+        ref={introRef}
+        className="relative flex flex-col items-center justify-center space-y-4 opacity-0"
+      >
         <Link
           href="/labs"
           onMouseEnter={() => setHovered("labs")}
