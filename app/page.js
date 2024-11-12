@@ -7,15 +7,22 @@ import useProjectStore from "@/app/lib/projectStore";
 import IntroScreen from "./components/IntroScreen";
 import Footer from "./components/Footer";
 
-// after:content[''] after:block after:border-b-2 after:border-primary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 after:origin-[0%_50%]
-
 export default function Home() {
   const [hovered, setHovered] = useState("");
+  const [showIntro, setShowIntro] = useState(false);
   const introRef = useRef(null);
   const loading = useProjectStore((state) => state.loading);
 
   useEffect(() => {
-    if (!loading) {
+    const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
+    if (!hasSeenIntro) {
+      setShowIntro(true);
+      sessionStorage.setItem("hasSeenIntro", "true");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loading || !showIntro) {
       gsap.fromTo(
         introRef.current,
         { opacity: 0, y: 20 },
@@ -26,45 +33,43 @@ export default function Home() {
 
   return (
     <div className="flex flex-row items-center justify-center h-screen">
-      <IntroScreen />
-      {!loading && (
-        <>
-          <div
-            ref={introRef}
-            className="relative flex flex-col items-center justify-center space-y-4 opacity-0"
+      {showIntro && <IntroScreen />}
+      <>
+        <div
+          ref={introRef}
+          className="relative flex flex-col items-center justify-center space-y-4 opacity-0"
+        >
+          <Link
+            href="/labs"
+            onMouseEnter={() => setHovered("labs")}
+            onMouseLeave={() => setHovered("")}
           >
-            <Link
-              href="/labs"
-              onMouseEnter={() => setHovered("labs")}
-              onMouseLeave={() => setHovered("")}
-            >
-              <h1 className="text-4xl transition-all duration-300 hover:font-medium">
-                LAbS
-              </h1>
-            </Link>
-            <Link
-              href="/laps"
-              onMouseEnter={() => setHovered("laps")}
-              onMouseLeave={() => setHovered("")}
-            >
-              <h1 className="text-4xl transition-all duration-300 hover:font-bold">
-                LApS
-              </h1>
-            </Link>
-            <Link
-              href="/lads"
-              onMouseEnter={() => setHovered("lads")}
-              onMouseLeave={() => setHovered("")}
-            >
-              <h1 className="text-4xl transition-all duration-300 hover:font-medium">
-                LAdS
-              </h1>
-            </Link>
-          </div>
-          <HoverText hovered={hovered} />
-          <Footer />
-        </>
-      )}
+            <h1 className="text-4xl transition-all duration-200 hover:font-bold">
+              LAbS
+            </h1>
+          </Link>
+          <Link
+            href="/laps"
+            onMouseEnter={() => setHovered("laps")}
+            onMouseLeave={() => setHovered("")}
+          >
+            <h1 className="text-4xl transition-all duration-200 hover:font-bold">
+              LApS
+            </h1>
+          </Link>
+          <Link
+            href="/lads"
+            onMouseEnter={() => setHovered("lads")}
+            onMouseLeave={() => setHovered("")}
+          >
+            <h1 className="text-4xl transition-all duration-200 hover:font-bold">
+              LAdS
+            </h1>
+          </Link>
+        </div>
+        <HoverText hovered={hovered} />
+        <Footer />
+      </>
     </div>
   );
 }

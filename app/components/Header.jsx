@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useRef, useState } from "react";
-
+import { ArrowUpRight } from "lucide-react";
 const Header = () => {
   console.log(
     "%cWebsite by %cMik Development!",
@@ -13,7 +13,6 @@ const Header = () => {
     "https://mikdevelopment.nl"
   );
   const pathname = usePathname();
-  const router = useRouter();
   const navRef = useRef(null);
   const navContainer = useRef(null);
   const logoRef = useRef(null);
@@ -45,14 +44,33 @@ const Header = () => {
       {!pathname.includes("/studio") && (
         <>
           <header className="fixed top-0 z-50 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10">
-            <div
+            <Link
+              href="/"
               ref={logoRef}
-              className="text-3xl font-bold transition-colors duration-300 cursor-pointer text-primary-500"
+              className="text-3xl font-bold transition-transform duration-300 cursor-pointer text-primary-500"
               onClick={() => {
                 if (isNavOpen) {
                   toggleNav();
                 }
-                router.back();
+              }}
+              onMouseEnter={() => {
+                logoRef.current.textContent = "LAAN";
+              }}
+              onMouseLeave={() => {
+                logoRef.current.textContent =
+                  pathname.includes("/labs") ||
+                  pathname.includes("/laps") ||
+                  pathname.includes("/lads")
+                    ? pathname
+                        .slice(
+                          pathname.indexOf("/") + 1,
+                          pathname.indexOf("/", pathname.indexOf("/") + 1) !==
+                            -1
+                            ? pathname.indexOf("/", pathname.indexOf("/") + 1)
+                            : pathname.length
+                        )
+                        .toUpperCase()
+                    : "LAAN";
               }}
             >
               {pathname.includes("/labs") ||
@@ -67,7 +85,7 @@ const Header = () => {
                     )
                     .toUpperCase()
                 : "LAAN"}
-            </div>
+            </Link>
             <div
               className="flex flex-col items-center justify-center w-12 h-full cursor-pointer"
               onClick={toggleNav}
@@ -94,20 +112,38 @@ const Header = () => {
             ></div>
             <div
               ref={navRef}
-              className="fixed right-0 z-10 flex flex-col items-center justify-center w-full h-full transition-transform duration-500 translate-x-full md:w-1/3 bg-primary-500"
+              className="fixed right-0 z-10 w-full h-full transition-transform duration-500 translate-x-full md:w-1/3 bg-primary-500"
             >
-              {["labs", "laps", "lads"].map((path) => (
-                <Link
-                  key={path}
-                  href={`/${path}`}
-                  className="text-2xl font-bold"
-                  onClick={() => {
-                    toggleNav();
-                  }}
-                >
-                  {path.charAt(0).toUpperCase() + path.slice(1)}
-                </Link>
-              ))}
+              <div className="flex flex-col h-full gap-5 mt-32">
+                <div className="flex flex-col border-t border-b border-white divide-y">
+                  {["LAbS", "LApS", "LAdS"].map((path) => (
+                    <Link
+                      key={path}
+                      href={`/${path.toLowerCase()}`}
+                      className="p-10 text-4xl font-bold transition-colors duration-300 hover:bg-white hover:text-primary-500"
+                      onClick={() => {
+                        toggleNav();
+                      }}
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        {path.charAt(0) + path.slice(1)}
+                        <ArrowUpRight className="w-14 h-14" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="flex flex-col">
+                  <Link
+                    href="/about"
+                    className="p-10 text-xl"
+                    onClick={() => {
+                      toggleNav();
+                    }}
+                  >
+                    Over ons
+                  </Link>
+                </div>
+              </div>
             </div>
           </nav>
         </>

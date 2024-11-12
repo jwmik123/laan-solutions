@@ -11,24 +11,6 @@ const Main = ({ project }) => {
   const overlayRef = useRef(null);
   const gradientRef = useRef(null);
   const titleRef = useRef([]);
-  const pictureRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const yOffset = window.scrollY * 0.1; // Increased multiplier for more noticeable effect
-      gsap.to(pictureRef.current, {
-        y: yOffset + "%",
-        duration: 0.5, // Increased duration for smoother transition
-        ease: "power3.out",
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const handleImageLoad = () => {
     gsap.fromTo(
@@ -77,10 +59,10 @@ const Main = ({ project }) => {
   return (
     <div className="w-full mt-32 ml-16 max-w-2/3">
       <div className="relative top-0 left-0 w-full mb-10 overflow-hidden aspect-video">
-        <picture ref={pictureRef} className="w-full h-full scale-110">
+        <picture className="w-full h-full scale-110">
           <Image
             ref={imageRef}
-            src={urlFor(project.image).url()}
+            src={urlFor(project.image).url() + "?fm=webp"}
             alt={project.title}
             width={1000}
             height={1000}
@@ -114,15 +96,15 @@ const Main = ({ project }) => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 my-16 sm:grid-cols-2">
+      <div className="grid w-full grid-cols-1 gap-4 my-16 md:grid-cols-2">
         {project.images?.map((image, index) => (
-          <div key={index} className="w-full aspect-video">
+          <div key={index} className="w-full">
             <Image
-              src={urlFor(image).url()}
+              src={urlFor(image).url() + "?fm=webp"}
               alt={`Project Image ${index + 1}`}
               width={500}
               height={500}
-              className="object-cover"
+              className="object-cover w-full h-auto"
             />
           </div>
         ))}
