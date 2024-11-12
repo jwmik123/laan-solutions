@@ -1,8 +1,29 @@
-import React from "react";
+"use client";
+
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
 
 const Sidebar = ({ project }) => {
+  const sidebarRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      sidebarRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        ease: "power1.out",
+        duration: 0.8,
+        delay: 1,
+      }
+    );
+  });
   return (
-    <div className="sticky h-full min-w-[250px] max-w-1/3 top-32">
+    <div
+      ref={sidebarRef}
+      className="sticky h-full min-w-[250px] max-w-1/3 top-32 opacity-0"
+    >
       <div className="flex flex-col space-y-2">
         <div className="flex flex-col mb-2">
           <p className="text-lg font-medium text-primary-700">Location -</p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
@@ -11,6 +11,24 @@ const Main = ({ project }) => {
   const overlayRef = useRef(null);
   const gradientRef = useRef(null);
   const titleRef = useRef([]);
+  const pictureRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const yOffset = window.scrollY * 0.1; // Increased multiplier for more noticeable effect
+      gsap.to(pictureRef.current, {
+        y: yOffset + "%",
+        duration: 0.5, // Increased duration for smoother transition
+        ease: "power3.out",
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleImageLoad = () => {
     gsap.fromTo(
@@ -57,17 +75,19 @@ const Main = ({ project }) => {
   };
 
   return (
-    <div className="ml-16 mt-32 h-[300svh] w-full max-w-2/3">
-      <div className="relative w-full mb-10 overflow-hidden aspect-video">
-        <Image
-          ref={imageRef}
-          src={urlFor(project.image).url()}
-          alt={project.title}
-          width={1000}
-          height={1000}
-          className="object-cover w-full h-full"
-          onLoadingComplete={handleImageLoad}
-        />
+    <div className="w-full mt-32 ml-16 max-w-2/3">
+      <div className="relative top-0 left-0 w-full mb-10 overflow-hidden aspect-video">
+        <picture ref={pictureRef} className="w-full h-full scale-110">
+          <Image
+            ref={imageRef}
+            src={urlFor(project.image).url()}
+            alt={project.title}
+            width={1000}
+            height={1000}
+            className="object-cover w-full h-full"
+            onLoadingComplete={handleImageLoad}
+          />
+        </picture>
         <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
         <div
           ref={gradientRef}
@@ -91,6 +111,20 @@ const Main = ({ project }) => {
       <div className="text-black portableText">
         {project.content?.map((block) => (
           <PortableText key={block._key} value={block} />
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 my-16 sm:grid-cols-2">
+        {project.images?.map((image, index) => (
+          <div key={index} className="w-full aspect-video">
+            <Image
+              src={urlFor(image).url()}
+              alt={`Project Image ${index + 1}`}
+              width={500}
+              height={500}
+              className="object-cover"
+            />
+          </div>
         ))}
       </div>
     </div>

@@ -2,58 +2,69 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import useProjectStore from "@/app/lib/projectStore";
 import IntroScreen from "./components/IntroScreen";
 import Footer from "./components/Footer";
+
+// after:content[''] after:block after:border-b-2 after:border-primary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 after:origin-[0%_50%]
+
 export default function Home() {
   const [hovered, setHovered] = useState("");
   const introRef = useRef(null);
-  useGSAP(() => {
-    gsap.fromTo(
-      introRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5 }
-    );
-  });
+  const loading = useProjectStore((state) => state.loading);
+
+  useEffect(() => {
+    if (!loading) {
+      gsap.fromTo(
+        introRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.3, delay: 0.5 }
+      );
+    }
+  }, [loading]);
 
   return (
     <div className="flex flex-row items-center justify-center h-screen">
       <IntroScreen />
-      <div
-        ref={introRef}
-        className="relative flex flex-col items-center justify-center space-y-4 opacity-0"
-      >
-        <Link
-          href="/labs"
-          onMouseEnter={() => setHovered("labs")}
-          onMouseLeave={() => setHovered("")}
-        >
-          <h1 className="text-4xl after:content[''] after:block after:border-b-2 after:border-primary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 after:origin-[0%_50%]">
-            LAbS
-          </h1>
-        </Link>
-        <Link
-          href="/laps"
-          onMouseEnter={() => setHovered("laps")}
-          onMouseLeave={() => setHovered("")}
-        >
-          <h1 className="text-4xl after:content[''] after:block after:border-b-2 after:border-primary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 after:origin-[0%_50%]">
-            LApS
-          </h1>
-        </Link>
-        <Link
-          href="/lads"
-          onMouseEnter={() => setHovered("lads")}
-          onMouseLeave={() => setHovered("")}
-        >
-          <h1 className="text-4xl after:content[''] after:block after:border-b-2 after:border-primary-500 after:scale-x-0 after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 after:origin-[0%_50%]">
-            LAdS
-          </h1>
-        </Link>
-      </div>
-      <HoverText hovered={hovered} />
-      <Footer />
+      {!loading && (
+        <>
+          <div
+            ref={introRef}
+            className="relative flex flex-col items-center justify-center space-y-4 opacity-0"
+          >
+            <Link
+              href="/labs"
+              onMouseEnter={() => setHovered("labs")}
+              onMouseLeave={() => setHovered("")}
+            >
+              <h1 className="text-4xl transition-all duration-300 hover:font-medium">
+                LAbS
+              </h1>
+            </Link>
+            <Link
+              href="/laps"
+              onMouseEnter={() => setHovered("laps")}
+              onMouseLeave={() => setHovered("")}
+            >
+              <h1 className="text-4xl transition-all duration-300 hover:font-bold">
+                LApS
+              </h1>
+            </Link>
+            <Link
+              href="/lads"
+              onMouseEnter={() => setHovered("lads")}
+              onMouseLeave={() => setHovered("")}
+            >
+              <h1 className="text-4xl transition-all duration-300 hover:font-medium">
+                LAdS
+              </h1>
+            </Link>
+          </div>
+          <HoverText hovered={hovered} />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

@@ -16,11 +16,10 @@ const Header = () => {
   const router = useRouter();
   const navRef = useRef(null);
   const navContainer = useRef(null);
+  const logoRef = useRef(null);
   const firstLineRef = useRef(null);
   const secondLineRef = useRef(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
-
-  pathname.includes("/studio") && console.log(pathname);
 
   const toggleNav = () => {
     setIsNavOpen((prev) => !prev);
@@ -30,21 +29,25 @@ const Header = () => {
     secondLineRef.current.style.transform = isNavOpen
       ? "translateY(5px)"
       : "translateY(0)";
+    logoRef.current.classList.toggle("text-white");
     firstLineRef.current.classList.toggle("bg-white");
     secondLineRef.current.classList.toggle("bg-white");
     navContainer.current.classList.toggle("pointer-events-auto");
-    navRef.current.style.transform = isNavOpen
-      ? "translateX(300%)"
-      : "translateX(100%)";
+    if (navRef.current) {
+      navRef.current.style.transform = isNavOpen
+        ? "translateX(100%)" // Move off screen when closed
+        : "translateX(0)"; // Bring it on screen when open
+    }
   };
 
   return (
     <>
       {!pathname.includes("/studio") && (
         <>
-          <header className="fixed top-0 z-40 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10">
+          <header className="fixed top-0 z-50 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10">
             <div
-              className="text-3xl font-bold cursor-pointer text-primary-500"
+              ref={logoRef}
+              className="text-3xl font-bold transition-colors duration-300 cursor-pointer text-primary-500"
               onClick={() => {
                 if (isNavOpen) {
                   toggleNav();
@@ -81,17 +84,17 @@ const Header = () => {
           </header>
           <nav
             ref={navContainer}
-            className="fixed top-0 left-0 z-40 w-full h-full text-white pointer-events-none"
+            className="fixed inset-0 z-40 w-full h-full text-white pointer-events-none"
           >
             <div
               className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 bg-black ${
-                isNavOpen ? "opacity-50" : "opacity-0"
+                isNavOpen ? "opacity-70" : "opacity-0"
               }`}
               onClick={toggleNav}
             ></div>
             <div
               ref={navRef}
-              className="relative z-10 flex flex-col items-center justify-center w-1/3 h-full transition-transform duration-500 translate-x-[300%] bg-primary-500"
+              className="fixed right-0 z-10 flex flex-col items-center justify-center w-full h-full transition-transform duration-500 translate-x-full md:w-1/3 bg-primary-500"
             >
               {["labs", "laps", "lads"].map((path) => (
                 <Link
