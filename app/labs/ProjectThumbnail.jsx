@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { useRef } from "react";
 import Link from "next/link";
+import useProjectStore from "@/app/lib/projectStore";
 
 const ProjectThumbnail = ({ project }) => {
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
   const titleRef = useRef([]);
+  const loading = useProjectStore((state) => state.loading);
 
   const handleImageLoad = () => {
     gsap.fromTo(
@@ -60,7 +61,7 @@ const ProjectThumbnail = ({ project }) => {
                 width={400}
                 height={300}
                 className="object-cover w-full h-full"
-                onLoadingComplete={handleImageLoad}
+                onLoadingComplete={() => !loading && handleImageLoad()}
               />
             </div>
             <div ref={overlayRef} className="absolute inset-0 bg-white"></div>

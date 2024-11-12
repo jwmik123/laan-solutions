@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = ({ project }) => {
   return (
-    <div className="sticky h-full min-w-[250px] max-w-1/3 top-[50%] -translate-y-1/2">
+    <div className="sticky h-full min-w-[250px] max-w-1/3 top-32">
       <div className="flex flex-col space-y-2">
         <div className="flex flex-col mb-2">
           <p className="text-lg font-bold text-primary-700">Location -</p>

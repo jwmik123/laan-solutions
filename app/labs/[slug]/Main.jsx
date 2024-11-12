@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
@@ -13,7 +12,6 @@ const Main = ({ project }) => {
   const titleRef = useRef([]);
 
   const handleImageLoad = () => {
-    // Animation for the overlay and image
     gsap.fromTo(
       overlayRef.current,
       { y: "0%" },
@@ -49,11 +47,6 @@ const Main = ({ project }) => {
 
   return (
     <div className="ml-16 mt-32 h-[300svh] w-full max-w-2/3">
-      {/* <h2 className="mb-4 text-base font-light text-gray-500">
-        <span>{project.city},</span>
-        <span> {project.country}</span>
-        <span> | {new Date(project.endDate).getFullYear()}</span>
-      </h2> */}
       <div className="relative w-full mb-10 overflow-hidden aspect-video">
         <Image
           ref={imageRef}

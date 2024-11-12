@@ -4,55 +4,25 @@ import gsap from "gsap";
 import Image from "next/image";
 
 const IntroScreen = () => {
-  const [isVisible, setIsVisible] = useState(() => {
-    // Check if the intro screen has been shown before
-    if (typeof window !== "undefined") {
-      return !localStorage.getItem("introShown");
-    }
-    return true;
-  });
   const introRef = useRef(null);
-  const cursorRef = useRef(null);
 
   const handleClick = () => {
     gsap.to(introRef.current, {
-      opacity: 0,
-      duration: 1,
+      marginLeft: "10rem",
+      marginRight: "10rem",
+      marginTop: "5rem",
+      marginBottom: "5rem",
+      duration: 0.8,
       ease: "power3.out",
       onComplete: () => {
-        setIsVisible(false);
-        // Mark the intro screen as shown
-        localStorage.setItem("introShown", "true");
+        gsap.to(introRef.current, {
+          translateY: "-120%",
+          duration: 0.5,
+          ease: "power3.out",
+        });
       },
     });
   };
-
-  useEffect(() => {
-    if (isVisible) {
-      gsap.fromTo(
-        introRef.current,
-        { opacity: 1 },
-        { opacity: 1, duration: 1, ease: "power3.out" }
-      );
-
-      const handleMouseMove = (e) => {
-        gsap.to(cursorRef.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 1,
-          ease: "power3.out",
-        });
-      };
-
-      window.addEventListener("mousemove", handleMouseMove);
-
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-      };
-    }
-  }, [isVisible]);
-
-  if (!isVisible) return null;
 
   return (
     <div
@@ -61,7 +31,7 @@ const IntroScreen = () => {
       onClick={handleClick}
     >
       <div className="relative w-full h-full">
-        <div className="absolute inset-0 z-10 opacity-40 bg-primary-500"></div>
+        <div className="absolute inset-0 z-10 opacity-50 bg-primary-700"></div>
         <Image
           src="/konijn.jpg"
           alt="Background"
@@ -69,14 +39,11 @@ const IntroScreen = () => {
           className="object-cover w-full h-full"
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white">LAAN Solutions</h1>
+          <h1 className="text-4xl text-white">
+            <span className="font-bold">LAAN</span>{" "}
+            <span className="font-light">Solutions</span>
+          </h1>
         </div>
-        {/* <div
-          ref={cursorRef}
-          className="absolute z-30 px-4 py-2 text-white translate-x-1/2 translate-y-1/2 rounded-full pointer-events-none bg-primary-500"
-        >
-          klik
-        </div> */}
       </div>
     </div>
   );
