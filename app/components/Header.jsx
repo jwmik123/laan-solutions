@@ -22,12 +22,14 @@ const Header = () => {
 
   const toggleNav = () => {
     setIsNavOpen((prev) => !prev);
-    firstLineRef.current.style.transform = isNavOpen
-      ? "translateY(-5px)"
-      : "translateY(0)";
-    secondLineRef.current.style.transform = isNavOpen
-      ? "translateY(5px)"
-      : "translateY(0)";
+    setTimeout(() => {
+      firstLineRef.current.style.transform = isNavOpen
+        ? "translateY(-5px)"
+        : "translateY(0)";
+      secondLineRef.current.style.transform = isNavOpen
+        ? "translateY(5px)"
+        : "translateY(0)";
+    }, 200);
     logoRef.current.classList.toggle("text-white");
     firstLineRef.current.classList.toggle("bg-white");
     secondLineRef.current.classList.toggle("bg-white");

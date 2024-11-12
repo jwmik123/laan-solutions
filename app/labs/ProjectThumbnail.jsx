@@ -17,7 +17,7 @@ const ProjectThumbnail = ({ project }) => {
       {
         y: "-100%",
         duration: 1,
-        ease: "power3.inOut",
+        ease: "power4.inOut",
         delay: 0.2,
       }
     );
@@ -37,8 +37,7 @@ const ProjectThumbnail = ({ project }) => {
       titleRef.current,
       { y: 25 },
       {
-        y: -25,
-        stagger: 0.02,
+        y: 0,
         ease: "power3.out",
         duration: 0.5,
         delay: 0.8,
@@ -51,7 +50,7 @@ const ProjectThumbnail = ({ project }) => {
       <div className="cursor-pointer group">
         <Link href={`/labs/${project.slug.current}`}>
           {project.image && (
-            <div className="h-[450px] overflow-hidden relative">
+            <div className="h-[500px] overflow-hidden relative">
               <div className="w-full h-full transition-all duration-300 group-hover:scale-110">
                 <Image
                   ref={imageRef}
@@ -67,17 +66,9 @@ const ProjectThumbnail = ({ project }) => {
             </div>
           )}
           <div className="flex justify-between mx-1 mt-2">
-            <div className="flex flex-col overflow-hidden max-h-5">
-              <h2 className="text-lg font-bold text-black translate-y-5">
-                {project.title.split("").map((letter, index) => (
-                  <span
-                    key={index}
-                    ref={(el) => (titleRef.current[index] = el)}
-                    className="inline-block"
-                  >
-                    {letter === " " ? "\u00A0" : letter}
-                  </span>
-                ))}
+            <div className="flex flex-col overflow-hidden">
+              <h2 ref={titleRef} className="text-xl font-medium text-black">
+                {project.title}
               </h2>
             </div>
             {/* <p className="text-lg font-light text-gray-500">
