@@ -8,6 +8,7 @@ import Navigation from "./Navigation";
 
 const Header = () => {
   const pathname = usePathname();
+  const headerRef = useRef(null);
   const navRef = useRef(null);
   const navContainer = useRef(null);
   const logoRef = useRef(null);
@@ -25,6 +26,7 @@ const Header = () => {
         ? "translateY(5px)"
         : "translateY(0)";
     }, 200);
+    headerRef.current.classList.toggle("z-50");
     logoRef.current.classList.toggle("text-white");
     firstLineRef.current.classList.toggle("bg-white");
     secondLineRef.current.classList.toggle("bg-white");
@@ -40,7 +42,10 @@ const Header = () => {
     <>
       {!pathname.includes("/studio") && (
         <>
-          <header className="fixed top-0 z-20 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10">
+          <header
+            ref={headerRef}
+            className="fixed top-0 z-20 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10"
+          >
             <Link
               href="/"
               ref={logoRef}
