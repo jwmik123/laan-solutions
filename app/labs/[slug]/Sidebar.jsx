@@ -22,7 +22,7 @@ const Sidebar = ({ project }) => {
   return (
     <div
       ref={sidebarRef}
-      className="sticky h-full min-w-[250px] max-w-1/3 top-32 opacity-0"
+      className="hidden md:block sticky h-full min-w-[250px] max-w-1/3 top-32 opacity-0"
     >
       <div className="flex flex-col space-y-4">
         <div className="flex flex-col mb-4">

@@ -18,7 +18,7 @@ const IntroScreen = () => {
       onComplete: () => {
         setLoading(false);
         gsap.to(introRef.current, {
-          translateY: "-120%",
+          translateY: "120%",
           duration: 0.5,
           ease: "power3.out",
         });

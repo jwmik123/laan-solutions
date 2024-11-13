@@ -14,7 +14,7 @@ export default async function ProjectPage({ params }) {
   }
 
   return (
-    <main className="relative flex w-full px-5 md:px-10">
+    <main className="relative flex flex-col w-full px-5 md:flex-row md:px-10">
       <Sidebar project={project} />
       <Main project={project} />
     </main>

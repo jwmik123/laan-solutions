@@ -31,8 +31,6 @@ const ProjectThumbnail = ({ project }) => {
         ease: "power1.out",
       }
     );
-
-    // Stagger animation for each letter in the title
     gsap.fromTo(
       titleRef.current,
       { y: 25 },
@@ -71,9 +69,9 @@ const ProjectThumbnail = ({ project }) => {
                 {project.title}
               </h2>
             </div>
-            {/* <p className="text-lg font-light text-gray-500">
-            {project.endDate.split("-")[0]}
-          </p> */}
+            <p className="text-lg font-light text-gray-500">
+              {/* {project.endDate} */}
+            </p>
           </div>
         </Link>
       </div>

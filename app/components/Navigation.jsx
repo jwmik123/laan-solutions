@@ -18,8 +18,8 @@ const Navigation = ({ isNavOpen, toggleNav, navRef, navContainer }) => {
         {
           opacity: 1,
           y: 0,
-          duration: 0.4,
-          delay: 0.5,
+          duration: 0.3,
+          delay: 0.4,
           stagger: 0.2,
         }
       );
@@ -39,9 +39,9 @@ const Navigation = ({ isNavOpen, toggleNav, navRef, navContainer }) => {
       ></div>
       <div
         ref={navRef}
-        className="fixed right-0 z-10 w-full pb-16 transition-transform duration-300 translate-x-full top-4 rounded-xl md:w-1/3 lg:w-1/4 bg-primary-500"
+        className="fixed right-0 z-10 w-full h-full md:py-16  md:ml-0  transition-transform duration-300 ease-in-out translate-x-[110%] md:mr-5 md:h-auto md:top-4 rounded-xl min-w-[350px] md:max-w-[380px] md:w-1/3 lg:w-1/4 bg-primary-500"
       >
-        <div className="flex flex-col h-full gap-5 mt-24">
+        <div className="flex flex-col justify-center h-full gap-5">
           <div className="flex flex-col">
             {["LAbS", "LApS", "LAdS"].map((path, index) => (
               <Link

@@ -35,8 +35,8 @@ const Header = () => {
     navContainer.current.classList.toggle("pointer-events-auto");
     if (navRef.current) {
       navRef.current.style.transform = isNavOpen
-        ? "translateX(100%)" // Move off screen when closed
-        : "translateX(-20px)"; // Bring it on screen when open
+        ? "translateX(110%)" // Move off screen when closed
+        : "translateX(0)"; // Bring it on screen when open
     }
   };
 
