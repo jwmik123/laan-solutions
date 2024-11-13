@@ -8,8 +8,8 @@ const IntroScreen = () => {
   const setLoading = useProjectStore((state) => state.setLoading);
   const handleClick = () => {
     gsap.to(introRef.current, {
-      marginLeft: "10rem",
-      marginRight: "10rem",
+      marginLeft: window.innerWidth < 768 ? "2rem" : "10rem",
+      marginRight: window.innerWidth < 768 ? "2rem" : "10rem",
       marginTop: "5rem",
       marginBottom: "5rem",
       borderRadius: "1rem",

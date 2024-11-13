@@ -5,12 +5,6 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import Navigation from "./Navigation";
 const Header = () => {
-  console.log(
-    "%cWebsite by %cMik Development!",
-    "color: white; font-size: 12px;",
-    "color: orange; font-size: 14px; font-weight: bold;",
-    "https://mikdevelopment.nl"
-  );
   const pathname = usePathname();
   const navRef = useRef(null);
   const navContainer = useRef(null);

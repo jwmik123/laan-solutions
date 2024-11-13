@@ -52,12 +52,13 @@ const ProjectThumbnail = ({ project }) => {
               <div className="w-full h-full transition-all duration-300 group-hover:scale-110">
                 <Image
                   ref={imageRef}
+                  priority
                   src={urlFor(project.image).url()}
                   alt={project.title}
                   width={400}
                   height={300}
                   className="object-cover w-full h-full"
-                  onLoadingComplete={handleImageLoad}
+                  onLoad={handleImageLoad}
                 />
               </div>
               <div ref={overlayRef} className="absolute inset-0 bg-white"></div>

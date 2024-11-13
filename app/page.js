@@ -14,6 +14,15 @@ export default function Home() {
   const loading = useProjectStore((state) => state.loading);
 
   useEffect(() => {
+    console.log(
+      "%cWebsite by %cMik Development!",
+      "color: white; font-size: 12px;",
+      "color: orange; font-size: 14px; font-weight: bold;",
+      "https://mikdevelopment.nl"
+    );
+  }, []);
+
+  useEffect(() => {
     const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
     if (!hasSeenIntro) {
       setShowIntro(true);
