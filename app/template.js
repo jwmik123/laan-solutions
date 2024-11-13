@@ -1,8 +1,9 @@
 "use client";
-import gsap from "gsap";
-import { ReactLenis } from "lenis/react";
+
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import gsap from "gsap";
+import { ReactLenis } from "lenis/react";
 
 export default function Template({ children }) {
   const lenisRef = useRef();

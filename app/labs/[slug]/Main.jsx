@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 const Main = ({ project }) => {
   const imageRef = useRef(null);
@@ -17,7 +18,7 @@ const Main = ({ project }) => {
       overlayRef.current,
       { y: "0%" },
       {
-        y: "-100%",
+        y: "-120%",
         duration: 1,
         ease: "power3.inOut",
         delay: 0.2,
@@ -57,7 +58,15 @@ const Main = ({ project }) => {
   };
 
   return (
-    <div className="w-full mt-32 ml-0 md:ml-16 max-w-2/3">
+    <div className="w-full mt-20 ml-0 md:ml-16 max-w-2/3">
+      <div className="py-4">
+        <Link
+          href="/labs"
+          className="h-full text-lg font-medium text-primary-700"
+        >
+          &larr; Terug naar projecten
+        </Link>
+      </div>
       <div className="relative top-0 left-0 w-full mb-8 overflow-hidden aspect-video">
         <picture className="w-full h-full scale-110">
           <Image
@@ -71,7 +80,10 @@ const Main = ({ project }) => {
             onLoad={handleImageLoad}
           />
         </picture>
-        <div ref={overlayRef} className="absolute inset-0 bg-white"></div>
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 bg-white pointer-events-none"
+        ></div>
         <div
           ref={gradientRef}
           className="absolute inset-0 opacity-0 bg-gradient-to-tr from-primary-900 via-transparent to-transparent"

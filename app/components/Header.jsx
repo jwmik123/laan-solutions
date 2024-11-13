@@ -1,9 +1,11 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useRef, useState } from "react";
+
 import Navigation from "./Navigation";
+
 const Header = () => {
   const pathname = usePathname();
   const navRef = useRef(null);

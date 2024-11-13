@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useEffect } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 
 const Navigation = ({ isNavOpen, toggleNav, navRef, navContainer }) => {

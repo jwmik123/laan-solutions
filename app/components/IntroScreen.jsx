@@ -1,15 +1,29 @@
 "use client";
+
 import { useRef, useState, useEffect } from "react";
-import gsap from "gsap";
 import Image from "next/image";
+import gsap from "gsap";
+
 import useProjectStore from "@/app/lib/projectStore";
 
 const IntroScreen = () => {
   const introRef = useRef(null);
   const setLoading = useProjectStore((state) => state.setLoading);
-  const images = ["/watweg.jpg", "/drebbel.jpg", "/konijn.jpg"]; // Array of images
+  const images = ["/konijn.jpg", "/drebbel.jpg", "/watweg.jpg"]; // Array of images
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const imageRefs = useRef([]);
+
+  useEffect(() => {
+    images.forEach((image) => {
+      fetch(image)
+        .then((response) => response.blob())
+        .then((blob) => createImageBitmap(blob))
+        .then((bitmap) => {
+          imageRefs.current.push(bitmap);
+        });
+    });
+    gsap.to(imageRefs.current[0], { opacity: 1, duration: 1 });
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,8 +31,8 @@ const IntroScreen = () => {
       const currentImage = imageRefs.current[currentImageIndex];
       const nextImage = imageRefs.current[nextIndex];
 
-      gsap.to(currentImage, { opacity: 0, duration: 1.5 });
-      gsap.to(nextImage, { opacity: 1, duration: 1.5 });
+      gsap.to(currentImage, { opacity: 0, duration: 1 });
+      gsap.to(nextImage, { opacity: 1, duration: 1 });
 
       setCurrentImageIndex(nextIndex);
     }, 3500); // Change image every 3 seconds
@@ -55,14 +69,14 @@ const IntroScreen = () => {
       <div className="relative w-full h-full">
         <div className="absolute inset-0 z-10 opacity-50 bg-primary-700"></div>
         {images.map((image, index) => (
-          <div key={index}>
+          <div className="absolute inset-0" key={index}>
             <Image
               ref={(el) => (imageRefs.current[index] = el)}
               src={image}
               alt="Background"
               priority
               fill
-              className={`object-cover w-full z-0 h-full ${index === currentImageIndex ? "opacity-1" : "opacity-0"}`}
+              className={`object-cover w-full z-0 h-full opacity-0 ${index === currentImageIndex ? "opacity-1" : "opacity-0"}`}
             />
             <div className="absolute inset-0 bg-white -z-10"></div>
           </div>

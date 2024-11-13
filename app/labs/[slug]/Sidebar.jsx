@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
+import Link from "next/link";
 
 const Sidebar = ({ project }) => {
   const sidebarRef = useRef(null);
@@ -22,7 +23,7 @@ const Sidebar = ({ project }) => {
   return (
     <div
       ref={sidebarRef}
-      className="hidden md:block sticky h-full min-w-[250px] max-w-1/3 top-32 opacity-0"
+      className="hidden md:block sticky h-full min-w-[250px] max-w-1/3 top-36 opacity-0"
     >
       <div className="flex flex-col space-y-4">
         <div className="flex flex-col">
@@ -30,7 +31,7 @@ const Sidebar = ({ project }) => {
           <p className="flex flex-col text-sm font-light text-black">
             <span>{project.streetname}</span>
             <span>
-              {project.postalcode.toUpperCase()}, {project.city}
+              {project.postalcode?.toUpperCase()}, {project.city}
             </span>
             <span>{project.country}</span>
           </p>
@@ -65,20 +66,20 @@ const Sidebar = ({ project }) => {
             )}
           </ul>
         </div>
-        <div className="mb-4">
-          <p className="text-lg font-medium text-primary-700">
-            In samenwerking met -
-          </p>
-          <ul className="text-sm font-light text-black">
-            {project.collaborators && project.collaborators.length > 0 ? (
-              project.collaborators.map((collaborator, index) => (
-                <li key={index}>{collaborator}</li>
-              ))
-            ) : (
-              <li>Geen samenwerkingen gevonden</li>
-            )}
-          </ul>
-        </div>
+        {project.collaborators && project.collaborators.length > 0 && (
+          <div className="mb-4">
+            <p className="text-lg font-medium text-primary-700">
+              In samenwerking met -
+            </p>
+            <ul className="text-sm font-light text-black">
+              {project.collaborators &&
+                project.collaborators.length > 0 &&
+                project.collaborators.map((collaborator, index) => (
+                  <li key={index}>{collaborator}</li>
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

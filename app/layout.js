@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+
 import Header from "./components/Header";
 import Template from "./template";
 
@@ -18,6 +19,21 @@ export const metadata = {
   title: "Laan Solutions",
   description:
     "Laan Building Solutions, Laan Permit Solutions, Laan Drawing Solutions",
+  icons: {
+    icon: "/favicon.ico",
+  },
+  keywords: [
+    "Laan Solutions",
+    "Building Solutions",
+    "Permit Solutions",
+    "Drawing Solutions",
+    "Construction",
+    "Architecture",
+    "Laan",
+  ],
+  author: "Laan Solutions",
+  charset: "UTF-8",
+  robots: "index, follow",
 };
 
 export default function RootLayout({ children }) {

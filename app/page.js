@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
+
 import useProjectStore from "@/app/lib/projectStore";
 import IntroScreen from "./components/IntroScreen";
 import Footer from "./components/Footer";
