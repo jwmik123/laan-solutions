@@ -25,7 +25,7 @@ const Sidebar = ({ project }) => {
       className="hidden md:block sticky h-full min-w-[250px] max-w-1/3 top-32 opacity-0"
     >
       <div className="flex flex-col space-y-4">
-        <div className="flex flex-col mb-4">
+        <div className="flex flex-col">
           <p className="text-lg font-medium text-primary-700">Locatie -</p>
           <p className="flex flex-col text-sm font-light text-black">
             <span>{project.streetname}</span>
@@ -55,9 +55,19 @@ const Sidebar = ({ project }) => {
           <p className="text-lg font-medium text-primary-700">Grootte -</p>
           <p className="text-sm font-light text-black">{project.size}</p>
         </div>
+        <div className="mb-2">
+          <p className="text-lg font-medium text-primary-700">Team -</p>
+          <ul className="text-sm font-light text-black">
+            {project.team && project.team.length > 0 ? (
+              project.team.map((member, index) => <li key={index}>{member}</li>)
+            ) : (
+              <li>Geen teamleden gevonden</li>
+            )}
+          </ul>
+        </div>
         <div className="mb-4">
           <p className="text-lg font-medium text-primary-700">
-            Samenwerking / Consultants -
+            In samenwerking met -
           </p>
           <ul className="text-sm font-light text-black">
             {project.collaborators && project.collaborators.length > 0 ? (
@@ -66,16 +76,6 @@ const Sidebar = ({ project }) => {
               ))
             ) : (
               <li>Geen samenwerkingen gevonden</li>
-            )}
-          </ul>
-        </div>
-        <div className="mb-2">
-          <p className="text-lg font-medium text-primary-700">Team -</p>
-          <ul className="text-sm font-light text-black">
-            {project.team && project.team.length > 0 ? (
-              project.team.map((member, index) => <li key={index}>{member}</li>)
-            ) : (
-              <li>Geen teamleden gevonden</li>
             )}
           </ul>
         </div>
