@@ -41,7 +41,7 @@ export default function Home() {
   }, [loading]);
 
   return (
-    <div className="flex flex-row items-center justify-center h-screen">
+    <div className="flex flex-row items-center justify-center h-screen max-h-screen">
       {showIntro && <IntroScreen />}
       <>
         <div

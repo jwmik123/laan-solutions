@@ -3,12 +3,14 @@ import Footer from "../components/Footer";
 
 const About = () => {
   return (
-    <div className="flex justify-center h-screen">
-      <div className="grid grid-cols-2 mx-5 mt-32 md:mx-10">
-        <h1 className="mb-4 text-6xl font-bold uppercase">Over Ons</h1>
+    <div className="flex justify-center h-full pb-24 md:h-screen">
+      <div className="grid grid-cols-1 mx-5 mt-32 md:grid-cols-2 md:mx-10">
+        <h1 className="hidden mb-4 text-6xl font-bold uppercase md:block">
+          Over Ons
+        </h1>
         <div className="flex flex-col gap-4">
           <h3 className="text-2xl font-bold">Welkom bij Laan Solutions!</h3>
-          <p className="text-lg leading-relaxed text-black">
+          <p className="text-lg leading-relaxed text-black ">
             Wij zijn een jong team dat elkaar ontmoette aan de TU Delft,
             verenigd door een passie voor het versnellen en vereenvoudigen van
             bouwprojecten. Ons doel? Het hele traject van vergunning tot bouw

@@ -26,7 +26,7 @@ const Sidebar = ({ project }) => {
     >
       <div className="flex flex-col space-y-4">
         <div className="flex flex-col mb-4">
-          <p className="text-lg font-medium text-primary-700">Location -</p>
+          <p className="text-lg font-medium text-primary-700">Locatie -</p>
           <p className="flex flex-col text-sm font-light text-black">
             <span>{project.streetname}</span>
             <span>
@@ -40,24 +40,24 @@ const Sidebar = ({ project }) => {
           <p className="text-sm font-light text-black">{project.client}</p>
         </div>
         <div className="mb-4">
-          <p className="text-lg font-medium text-primary-700">Start Year -</p>
+          <p className="text-lg font-medium text-primary-700">Start Jaar -</p>
           <p className="text-sm font-light text-black">
             {new Date(project.startDate).getFullYear()}
           </p>
         </div>
         <div className="mb-4">
-          <p className="text-lg font-medium text-primary-700">End Year -</p>
+          <p className="text-lg font-medium text-primary-700">Eind Jaar -</p>
           <p className="text-sm font-light text-black">
             {new Date(project.endDate).getFullYear()}
           </p>
         </div>
         <div className="mb-4">
-          <p className="text-lg font-medium text-primary-700">Size -</p>
+          <p className="text-lg font-medium text-primary-700">Grootte -</p>
           <p className="text-sm font-light text-black">{project.size}</p>
         </div>
         <div className="mb-4">
           <p className="text-lg font-medium text-primary-700">
-            Collaborators / Consultants -
+            Samenwerking / Consultants -
           </p>
           <ul className="text-sm font-light text-black">
             {project.collaborators && project.collaborators.length > 0 ? (
@@ -65,7 +65,7 @@ const Sidebar = ({ project }) => {
                 <li key={index}>{collaborator}</li>
               ))
             ) : (
-              <li>No collaborators listed</li>
+              <li>Geen samenwerkingen gevonden</li>
             )}
           </ul>
         </div>
@@ -75,7 +75,7 @@ const Sidebar = ({ project }) => {
             {project.team && project.team.length > 0 ? (
               project.team.map((member, index) => <li key={index}>{member}</li>)
             ) : (
-              <li>No team members listed</li>
+              <li>Geen teamleden gevonden</li>
             )}
           </ul>
         </div>

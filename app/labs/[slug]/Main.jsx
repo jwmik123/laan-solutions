@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
@@ -62,12 +62,13 @@ const Main = ({ project }) => {
         <picture className="w-full h-full scale-110">
           <Image
             ref={imageRef}
+            priority
             src={urlFor(project.image).url() + "?fm=webp"}
             alt={project.title}
             width={1000}
             height={1000}
             className="object-cover w-full h-full"
-            onLoadingComplete={handleImageLoad}
+            onLoad={handleImageLoad}
           />
         </picture>
         <div ref={overlayRef} className="absolute inset-0 bg-white"></div>

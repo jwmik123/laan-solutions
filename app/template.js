@@ -41,7 +41,11 @@ export default function Template({ children }) {
       link.addEventListener("click", (e) => {
         const isEmailLink =
           link.getAttribute("data-animation-link") === "no-animation";
-        if (!isEmailLink || pathname === "/") {
+        if (
+          !isEmailLink ||
+          pathname === "/" ||
+          pathname.includes(excludedPath)
+        ) {
           e.preventDefault(); // Prevent default navigation
           const url = link.getAttribute("href");
           handleRouteChangeStart(url);
