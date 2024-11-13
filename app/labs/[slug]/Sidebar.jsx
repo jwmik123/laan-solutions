@@ -30,7 +30,7 @@ const Sidebar = ({ project }) => {
           <p className="flex flex-col text-sm font-light text-black">
             <span>{project.streetname}</span>
             <span>
-              {project.postalcode}, {project.city}
+              {project.postalcode.toUpperCase()}, {project.city}
             </span>
             <span>{project.country}</span>
           </p>
