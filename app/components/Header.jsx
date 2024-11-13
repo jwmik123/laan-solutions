@@ -40,7 +40,7 @@ const Header = () => {
     <>
       {!pathname.includes("/studio") && (
         <>
-          <header className="fixed top-0 z-50 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10">
+          <header className="fixed top-0 z-20 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10">
             <Link
               href="/"
               ref={logoRef}

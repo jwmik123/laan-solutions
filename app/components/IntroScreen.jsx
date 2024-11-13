@@ -67,7 +67,7 @@ const IntroScreen = () => {
       onClick={handleClick}
     >
       <div className="relative w-full h-full">
-        <div className="absolute inset-0 z-10 opacity-50 bg-primary-700"></div>
+        <div className="absolute inset-0 z-30 opacity-50 bg-primary-700"></div>
         {images.map((image, index) => (
           <div className="absolute inset-0" key={index}>
             <Image
@@ -76,12 +76,12 @@ const IntroScreen = () => {
               alt="Background"
               priority
               fill
-              className={`object-cover w-full z-0 h-full opacity-0 ${index === currentImageIndex ? "opacity-1" : "opacity-0"}`}
+              className={`object-cover w-full z-10 h-full opacity-0 ${index === currentImageIndex ? "opacity-1" : "opacity-0"}`}
             />
-            <div className="absolute inset-0 bg-white -z-10"></div>
+            <div className="absolute inset-0 z-0 bg-white"></div>
           </div>
         ))}
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
+        <div className="absolute inset-0 z-40 flex items-center justify-center">
           <h1 className="text-4xl text-white md:text-5xl">
             <span className="font-bold">LAAN</span>{" "}
             <span className="font-light">Solutions</span>
