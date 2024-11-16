@@ -89,7 +89,7 @@ const Main = ({ project }) => {
           className="absolute inset-0 opacity-0 bg-gradient-to-tr from-primary-900 via-transparent to-transparent"
         ></div>
         <div className="absolute z-10 flex flex-col overflow-hidden bottom-5 left-5 md:bottom-10 md:left-10">
-          <h1 className="text-3xl text-white uppercase md:text-7xl">
+          <h1 className="text-3xl text-white uppercase md:text-5xl lg:text-7xl">
             {project.title.split("").map((letter, index) => (
               <span
                 key={index}
