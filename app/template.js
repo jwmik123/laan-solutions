@@ -36,32 +36,33 @@ export default function Template({ children }) {
       }
     };
 
-    // Listen for link clicks or programmatic navigation within the app
     const links = document.querySelectorAll("a");
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
-        const isEmailLink =
+        const isAnimationExcluded =
           link.getAttribute("data-animation-link") === "no-animation";
+
+        // Skip animation for excluded links or external links
         if (
-          !isEmailLink ||
-          pathname === "/" ||
-          pathname.includes(excludedPath)
+          isAnimationExcluded ||
+          link.href.startsWith("mailto:") ||
+          link.href.startsWith("tel:")
         ) {
-          e.preventDefault(); // Prevent default navigation
-          const url = link.getAttribute("href");
-          handleRouteChangeStart(url);
+          return; // Skip further processing
         }
+
+        e.preventDefault(); // Prevent default navigation
+        const url = link.getAttribute("href");
+        handleRouteChangeStart(url);
       });
     });
 
-    // Fade back in after navigation completes
     gsap.to("body", {
       opacity: 1,
       duration: 0.3,
       ease: "power3.inOut",
     });
 
-    // Clean up event listeners
     return () => {
       links.forEach((link) => {
         link.removeEventListener("click", handleRouteChangeStart);

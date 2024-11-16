@@ -46,48 +46,87 @@ const Header = () => {
             ref={headerRef}
             className="fixed top-0 z-20 flex items-center justify-between w-full h-24 px-5 py-5 font-sans md:px-10"
           >
-            <Link
-              href="/"
-              ref={logoRef}
-              className="text-3xl font-bold transition-transform duration-300 cursor-pointer text-primary-500"
-              onClick={() => {
-                if (isNavOpen) {
-                  toggleNav();
-                }
-              }}
-              onMouseEnter={() => {
-                logoRef.current.textContent = "LAAN";
-              }}
-              onMouseLeave={() => {
-                logoRef.current.textContent =
-                  pathname.includes("/labs") ||
-                  pathname.includes("/laps") ||
-                  pathname.includes("/lads")
-                    ? pathname
-                        .slice(
-                          pathname.indexOf("/") + 1,
-                          pathname.indexOf("/", pathname.indexOf("/") + 1) !==
-                            -1
-                            ? pathname.indexOf("/", pathname.indexOf("/") + 1)
-                            : pathname.length
-                        )
-                        .toUpperCase()
-                    : "LAAN";
-              }}
-            >
-              {pathname.includes("/labs") ||
-              pathname.includes("/laps") ||
-              pathname.includes("/lads")
-                ? pathname
-                    .slice(
-                      pathname.indexOf("/") + 1,
-                      pathname.indexOf("/", pathname.indexOf("/") + 1) !== -1
-                        ? pathname.indexOf("/", pathname.indexOf("/") + 1)
-                        : pathname.length
-                    )
-                    .toUpperCase()
-                : "LAAN"}
-            </Link>
+            {pathname === "/" ? (
+              <span
+                ref={logoRef}
+                className="text-3xl font-bold transition-transform duration-300 text-primary-500"
+                onMouseEnter={() => {
+                  logoRef.current.textContent = "LAAN";
+                }}
+                onMouseLeave={() => {
+                  logoRef.current.textContent =
+                    pathname.includes("/labs") ||
+                    pathname.includes("/laps") ||
+                    pathname.includes("/lads")
+                      ? pathname
+                          .slice(
+                            pathname.indexOf("/") + 1,
+                            pathname.indexOf("/", pathname.indexOf("/") + 1) !==
+                              -1
+                              ? pathname.indexOf("/", pathname.indexOf("/") + 1)
+                              : pathname.length
+                          )
+                          .toUpperCase()
+                      : "LAAN";
+                }}
+              >
+                {pathname.includes("/labs") ||
+                pathname.includes("/laps") ||
+                pathname.includes("/lads")
+                  ? pathname
+                      .slice(
+                        pathname.indexOf("/") + 1,
+                        pathname.indexOf("/", pathname.indexOf("/") + 1) !== -1
+                          ? pathname.indexOf("/", pathname.indexOf("/") + 1)
+                          : pathname.length
+                      )
+                      .toUpperCase()
+                  : "LAAN"}
+              </span>
+            ) : (
+              <Link
+                href="/"
+                ref={logoRef}
+                className="text-3xl font-bold transition-transform duration-300 cursor-pointer text-primary-500"
+                onClick={() => {
+                  if (isNavOpen) {
+                    toggleNav();
+                  }
+                }}
+                onMouseEnter={() => {
+                  logoRef.current.textContent = "LAAN";
+                }}
+                onMouseLeave={() => {
+                  logoRef.current.textContent =
+                    pathname.includes("/labs") ||
+                    pathname.includes("/laps") ||
+                    pathname.includes("/lads")
+                      ? pathname
+                          .slice(
+                            pathname.indexOf("/") + 1,
+                            pathname.indexOf("/", pathname.indexOf("/") + 1) !==
+                              -1
+                              ? pathname.indexOf("/", pathname.indexOf("/") + 1)
+                              : pathname.length
+                          )
+                          .toUpperCase()
+                      : "LAAN";
+                }}
+              >
+                {pathname.includes("/labs") ||
+                pathname.includes("/laps") ||
+                pathname.includes("/lads")
+                  ? pathname
+                      .slice(
+                        pathname.indexOf("/") + 1,
+                        pathname.indexOf("/", pathname.indexOf("/") + 1) !== -1
+                          ? pathname.indexOf("/", pathname.indexOf("/") + 1)
+                          : pathname.length
+                      )
+                      .toUpperCase()
+                  : "LAAN"}
+              </Link>
+            )}
             <div
               className="flex flex-col items-center justify-center w-12 h-full cursor-pointer"
               onClick={toggleNav}
