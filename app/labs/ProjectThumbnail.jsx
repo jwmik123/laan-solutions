@@ -10,6 +10,7 @@ const ProjectThumbnail = ({ project }) => {
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
   const titleRef = useRef([]);
+  const dateRef = useRef([]);
 
   const handleImageLoad = () => {
     gsap.fromTo(
@@ -34,6 +35,16 @@ const ProjectThumbnail = ({ project }) => {
     );
     gsap.fromTo(
       titleRef.current,
+      { y: 25 },
+      {
+        y: 0,
+        ease: "power3.out",
+        duration: 0.5,
+        delay: 0.8,
+      }
+    );
+    gsap.fromTo(
+      dateRef.current,
       { y: 25 },
       {
         y: 0,
@@ -79,9 +90,11 @@ const ProjectThumbnail = ({ project }) => {
                 {project.title}
               </h2>
             </div>
-            <p className="text-lg font-light text-gray-500">
-              {/* {project.endDate} */}
-            </p>
+            <div className="flex flex-col overflow-hidden">
+              <p ref={dateRef} className="text-lg font-light text-gray-500">
+                {new Date(project.endDate).getFullYear()}
+              </p>
+            </div>
           </div>
         </Link>
       </div>
