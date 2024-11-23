@@ -8,7 +8,7 @@ import useProjectStore from "@/app/lib/projectStore";
 import IntroScreen from "./components/IntroScreen";
 import Footer from "./components/Footer";
 
-export default function Home({ introscreen }) {
+export default function Home() {
   const [hovered, setHovered] = useState("");
   const [showIntro, setShowIntro] = useState(false);
   const introRef = useRef(null);
@@ -44,7 +44,7 @@ export default function Home({ introscreen }) {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen max-h-screen">
-      {showIntro && <IntroScreen introscreen={introscreen} />}
+      {showIntro && <IntroScreen />}
       <div
         ref={introRef}
         className="relative flex flex-col items-center justify-center space-y-4 opacity-0"

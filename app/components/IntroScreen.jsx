@@ -3,29 +3,40 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { urlFor } from "@/sanity/lib/image";
 
 import useProjectStore from "@/app/lib/projectStore";
+
+import { client } from "@/sanity/lib/client";
+
+async function getImages() {
+  const introscreen = await client.fetch(`*[_type == "introscreen"]`);
+  return introscreen[0].images;
+}
 
 const IntroScreen = () => {
   const introRef = useRef(null);
   const setLoading = useProjectStore((state) => state.setLoading);
-  const images = ["/konijn.jpg", "/drebbel.jpg", "/watweg.jpg"]; // Array of images
+  const [images, setImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const imageRefs = useRef([]);
 
   useEffect(() => {
-    images.forEach((image) => {
-      fetch(image)
-        .then((response) => response.blob())
-        .then((blob) => createImageBitmap(blob))
-        .then((bitmap) => {
-          imageRefs.current.push(bitmap);
-        });
+    getImages().then((fetchedImages) => {
+      const imageUrls = fetchedImages.map((img) => urlFor(img).url());
+      setImages(imageUrls);
     });
-    gsap.to(imageRefs.current[0], { opacity: 1, duration: 1 });
   }, []);
 
   useEffect(() => {
+    if (images.length === 0) return;
+
+    gsap.to(imageRefs.current[0], { opacity: 1, duration: 1 });
+  }, [images]);
+
+  useEffect(() => {
+    if (images.length === 0) return;
+
     const interval = setInterval(() => {
       const nextIndex = (currentImageIndex + 1) % images.length;
       const currentImage = imageRefs.current[currentImageIndex];
@@ -35,7 +46,7 @@ const IntroScreen = () => {
       gsap.to(nextImage, { opacity: 1, duration: 1 });
 
       setCurrentImageIndex(nextIndex);
-    }, 3500); // Change image every 3 seconds
+    }, 3500); // Change image every 3.5 seconds
 
     return () => clearInterval(interval);
   }, [currentImageIndex, images.length]);
@@ -76,7 +87,9 @@ const IntroScreen = () => {
               alt="Background"
               priority
               fill
-              className={`object-cover w-full z-10 h-full opacity-0 ${index === currentImageIndex ? "opacity-1" : "opacity-0"}`}
+              className={`object-cover w-full z-10 h-full opacity-0 ${
+                index === currentImageIndex ? "opacity-1" : "opacity-0"
+              }`}
             />
             <div className="absolute inset-0 z-0 bg-white"></div>
           </div>
