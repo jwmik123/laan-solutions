@@ -1,5 +1,5 @@
 import projectType from "./projectType";
-
+import introscreenType from "./introscreenType";
 export const schema = {
-  types: [projectType],
+  types: [projectType, introscreenType],
 };
