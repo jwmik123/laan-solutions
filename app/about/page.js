@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "../components/Footer";
-
+import ContactForm from "../components/ContactForm";
 const About = () => {
   return (
     <div className="flex items-center justify-center h-full pt-32 pb-24 mx-5 md:h-screen md:mx-10">
@@ -39,14 +39,15 @@ const About = () => {
             Telefoon:{" "}
             <a
               data-animation-link="no-animation"
-              href="tel:+31123456789"
+              href="tel:+31615191923"
               className="text-primary-500"
             >
-              +31 123 456 789
+              +31 6 15 19 19 23
             </a>
           </p>
         </div>
       </div>
+      <ContactForm />
       <Footer />
     </div>
   );

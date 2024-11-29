@@ -85,8 +85,8 @@ const Navigation = ({ isNavOpen, toggleNav, navRef, navContainer }) => {
             >
               <strong>Email:</strong> info@laansolutions.nl
             </Link>
-            <Link data-animation-link="no-animation" href="tel:+31655555555">
-              <strong>Telefoon:</strong> +31 6 55 55 55 55
+            <Link data-animation-link="no-animation" href="tel:+31615191923">
+              <strong>Telefoon:</strong> +31 6 15 19 19 23
             </Link>
           </div>
         </div>
