@@ -47,7 +47,7 @@ const About = () => {
           </p>
         </div>
       </div>
-      <ContactForm />
+      {/* <ContactForm /> */}
       <Footer />
     </div>
   );
