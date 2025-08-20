@@ -89,12 +89,13 @@ const Main = ({ project }) => {
           className="absolute inset-0 opacity-0 bg-gradient-to-tr from-primary-900 via-transparent to-transparent"
         ></div>
         <div className="absolute z-10 flex flex-col overflow-hidden bottom-5 left-5 md:bottom-10 md:left-10">
-          <h1 className="text-3xl text-white uppercase md:text-5xl lg:text-7xl">
+          <h1 className="text-3xl text-white uppercase font-semibold md:text-5xl lg:text-7xl tracking-tight">
             {project.title.split("").map((letter, index) => (
               <span
                 key={index}
                 ref={(el) => (titleRef.current[index] = el)}
                 className="inline-block opacity-0"
+                style={{ marginRight: letter === " " ? "0.2em" : "0em" }}
               >
                 {letter === " " ? "\u00A0" : letter}
               </span>
