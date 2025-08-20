@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import Projects from "./Projects";
-export default async function LabsPage() {
+
+export default async function ProjectsPage() {
   const projects = await client.fetch(`*[_type == "project"]`);
 
   return (

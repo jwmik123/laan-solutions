@@ -35,9 +35,10 @@ const ProjectThumbnail = ({ project }) => {
     );
     gsap.fromTo(
       titleRef.current,
-      { y: 25 },
+      { y: 25, opacity: 0 },
       {
         y: 0,
+        opacity: 1,
         ease: "power3.out",
         duration: 0.5,
         delay: 0.8,
@@ -45,9 +46,10 @@ const ProjectThumbnail = ({ project }) => {
     );
     gsap.fromTo(
       dateRef.current,
-      { y: 25 },
+      { y: 25, opacity: 0 },
       {
         y: 0,
+        opacity: 1,
         ease: "power3.out",
         duration: 0.5,
         delay: 0.8,
@@ -86,12 +88,12 @@ const ProjectThumbnail = ({ project }) => {
           )}
           <div className="flex justify-between mx-1 mt-2">
             <div className="flex flex-col overflow-hidden">
-              <h2 ref={titleRef} className="text-xl font-medium text-black">
+              <h2 ref={titleRef} className="text-xl font-medium text-black opacity-0">
                 {project.title}
               </h2>
             </div>
             <div className="flex flex-col overflow-hidden">
-              <p ref={dateRef} className="text-lg font-light text-gray-500">
+              <p ref={dateRef} className="text-lg font-light text-gray-500 opacity-0">
                 {new Date(project.endDate).getFullYear()}
               </p>
             </div>
